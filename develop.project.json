@@ -1,0 +1,7 @@
+{
+    "emitLegacyScripts": false,
+    "name": "Structix",
+    "tree": {
+        "$path": "src"
+    }
+}

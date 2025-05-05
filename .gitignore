@@ -1,0 +1,9 @@
+scripts/*.sh
+.luaurc
+
+empty.rbxl
+
+/*.rbxlx.lock
+/*.rbxl.lock
+
+**/sourcemap.json
