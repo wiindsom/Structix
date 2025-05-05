@@ -3,5 +3,5 @@
 </h1>
 
 <h2>
-    A roblox datastructure library made by Windsom.
+    A roblox datastructure library.
 </h2>
