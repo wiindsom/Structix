@@ -74,7 +74,9 @@ function Collection.size<T>(self: InternalCollection<T>): number
 end
 
 function Collection.copy<T>(self: InternalCollection<T>): CollectionType<T>
-	if self:_isEmpty() then error("Cannot copy from empty Collection.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty Collection.")
+    end
 	local copy = Collection.new() :: InternalCollection<T>
 	for i, v in self._collection do
 		copy._collection[i] = v
@@ -96,13 +98,17 @@ end
 
 function Collection.remove<T>(self: InternalCollection<T>, index: number): T
 	local value = table.remove(self._collection, index + 1)
-	if value == nil then error("Invalid index in removeAt.") end
+	if value == nil then
+        error("Invalid index in removeAt.")
+    end
 	return value
 end
 
 function Collection.get<T>(self: InternalCollection<T>, index: number): T
 	local value = self._collection[index + 1]
-	if value == nil then error("Invalid index in get.") end
+	if value == nil then
+        error("Invalid index in get.")
+    end
 	return value
 end
 

@@ -126,7 +126,9 @@ function Heap.size<T>(self: InternalHeap<T>): number
 end
 
 function Heap.copy<T>(self: InternalHeap<T>): HeapType<T>
-	if self:_isEmpty() then error("Cannot copy from empty Heap.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty Heap.")
+    end
 	local copy = Heap.new(self._mode) :: InternalHeap<T>
 	for key, value in self._heap do
 		copy._heap[key] = value

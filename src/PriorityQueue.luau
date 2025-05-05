@@ -130,7 +130,9 @@ function PriorityQueue.size<T>(self: InternalPriorityQueue<T>): number
 end
 
 function PriorityQueue.copy<T>(self: InternalPriorityQueue<T>): PriorityQueueType<T>
-	if self:_isEmpty() then error("Cannot copy from empty PriorityQueue.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty PriorityQueue.")
+    end
 	local newQueue = PriorityQueue.new() :: InternalPriorityQueue<T>
 	for i, item in self._heap do
 		newQueue._heap[i] = { value = item.value, priority = item.priority }

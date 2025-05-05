@@ -76,7 +76,9 @@ function Deque.size<T>(self: InternalDeque<T>): number
 end
 
 function Deque.copy<T>(self: InternalDeque<T>): DequeType<T>
-	if self:_isEmpty() then error("Cannot copy from empty Deque.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty Deque.")
+    end
 	local copy = Deque.new() :: InternalDeque<T>
 	for i = self._first, self._last do
 		copy._last += 1

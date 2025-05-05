@@ -63,10 +63,7 @@ function Map.new<K, V>(): MapType<K, V>
 end
 
 function Map.getHashMap<K, V>(self: InternalMap<K, V>): {[K]: V}
-	local copy = {}
-	for key, value in self._map do
-		copy[key] = value
-	end
+	local copy = table.clone(self._map)
 	return copy
 end
 
@@ -79,7 +76,9 @@ function Map.size<K, V>(self: InternalMap<K, V>): number
 end
 
 function Map.copy<K, V>(self: InternalMap<K, V>): MapType<K, V>
-	if self:_isEmpty() then error("Cannot copy from empty Map.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty Map.")
+    end
 	local copy = Map.new() :: InternalMap<K, V>
 	for key, value in self._map do
 		copy._map[key] = value

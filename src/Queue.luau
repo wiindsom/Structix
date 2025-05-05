@@ -96,7 +96,9 @@ function Queue.size<T>(self: InternalQueue<T>): number
 end
 
 function Queue.copy<T>(self: InternalQueue<T>): QueueType<T>
-	if self:_isEmpty() then error("Cannot copy from empty Queue.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty Queue.")
+    end
 	local copy = Queue.new() :: InternalQueue<T>
 	copy._queue = table.clone(self._queue)
 	return copy
@@ -117,7 +119,9 @@ function Queue.get<T>(self: InternalQueue<T>, index: number): T
 end
 
 function Queue.peek<T>(self: InternalQueue<T>): T
-	if self:_isEmpty() then error("Cannot peek from empty queue.") end
+	if self:_isEmpty() then
+        error("Cannot peek from empty queue.")
+    end
 	return self._queue[self._first]
 end
 
@@ -132,7 +136,9 @@ function Queue.enqueue<T>(self: InternalQueue<T>, value: T)
 end
 
 function Queue.dequeue<T>(self: InternalQueue<T>): T
-	if self:_isEmpty() then error("Cannot dequeue from empty queue.") end
+	if self:_isEmpty() then
+        error("Cannot dequeue from empty queue.")
+    end
 	local value = self._queue[self._first]
 	self._queue[self._first] = nil
 	self._first += 1

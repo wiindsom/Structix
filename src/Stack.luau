@@ -69,7 +69,9 @@ function Stack.size<T>(self: InternalStack<T>): number
 end
 
 function Stack.copy<T>(self: InternalStack<T>): StackType<T>
-	if self:_isEmpty() then error("Cannot copy from empty Stack.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty Stack.")
+    end
 	local copy = Stack.new() :: InternalStack<T>
 	copy._stack = table.clone(self._stack)
 	return copy
@@ -93,7 +95,9 @@ function Stack.reverse<T>(self: InternalStack<T>)
 end
 
 function Stack.peek<T>(self: InternalStack<T>): T
-	if self:_isEmpty() then error("Cannot peek from empty stack.") end
+	if self:_isEmpty() then
+        error("Cannot peek from empty stack.")
+    end
 	return self._stack[#self._stack]
 end
 
@@ -102,7 +106,9 @@ function Stack.push<T>(self: InternalStack<T>, value: T)
 end
 
 function Stack.pop<T>(self: InternalStack<T>): T?
-	if self:_isEmpty() then error("Cannot pop from empty stack.") end
+	if self:_isEmpty() then
+        error("Cannot pop from empty stack.")
+    end
 	local popped = table.remove(self._stack, #self._stack)
 	return popped
 end

@@ -89,7 +89,9 @@ function BinaryTree.size<T>(self: InternalBinaryTree<T>): number
 end
 
 function BinaryTree.copy<T>(self: InternalBinaryTree<T>): BinaryTreeType<T>
-	if self:_isEmpty() then error("Cannot copy from empty BinaryTree.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty BinaryTree.")
+    end
 	local copy = BinaryTree.new() :: InternalBinaryTree<T>
 	local function clone(node: Node<T>?)
 		if not node then return end
@@ -107,14 +109,14 @@ function BinaryTree.clear<T>(self: InternalBinaryTree<T>)
 end
 
 function BinaryTree.insert<T>(self: InternalBinaryTree<T>, value: T)
-	local function insertNode(node: Node<T>?, value: T): Node<T>
+	local function insertNode(node: Node<T>?, nodeValue: T): Node<T>
 		if not node then
-			return {value = value}
+			return {value = nodeValue}
 		end
-		if (value :: any) < (node.value :: any) then
-			node.left = insertNode(node.left, value)
+		if (nodeValue :: any) < (node.value :: any) then
+			node.left = insertNode(node.left, nodeValue)
 		else
-			node.right = insertNode(node.right, value)
+			node.right = insertNode(node.right, nodeValue)
 		end
 		return node
 	end
@@ -123,29 +125,29 @@ function BinaryTree.insert<T>(self: InternalBinaryTree<T>, value: T)
 end
 
 function BinaryTree.contains<T>(self: InternalBinaryTree<T>, value: T): boolean
-	local function search(node: Node<T>?, value: T): boolean
+	local function search(node: Node<T>?, nodeValue: T): boolean
 		if not node then return false end
-		if value == node.value then return true end
-		if (value :: any) < (node.value :: any) then
-			return search(node.left, value)
+		if nodeValue == node.value then return true end
+		if (nodeValue :: any) < (node.value :: any) then
+			return search(node.left, nodeValue)
 		else
-			return search(node.right, value)
+			return search(node.right, nodeValue)
 		end
 	end
 	return search(self._root, value)
 end
 
 function BinaryTree.remove<T>(self: InternalBinaryTree<T>, value: T)
-	local function removeNode(node: Node<T>?, value: T): (Node<T>?, boolean)
+	local function removeNode(node: Node<T>?, nodeValue: T): (Node<T>?, boolean)
 		if not node then
 			return nil, false
 		end
-		if (value :: any) < (node.value :: any) then
-			local newLeft, removed = removeNode(node.left, value)
+		if (nodeValue :: any) < (node.value :: any) then
+			local newLeft, removed = removeNode(node.left, nodeValue)
 			node.left = newLeft
 			return node, removed
-		elseif (value :: any) > (node.value :: any) then
-			local newRight, removed = removeNode(node.right, value)
+		elseif (nodeValue :: any) > (node.value :: any) then
+			local newRight, removed = removeNode(node.right, nodeValue)
 			node.right = newRight
 			return node, removed
 		else

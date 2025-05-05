@@ -1,4 +1,7 @@
 --!strict
+
+--multiple_statements: false
+
 type Node<T> = {value: T, next: Node<T>?, previous: Node<T>?}
 export type LinkedListType<T> = {
 	getLinkedList: (self: LinkedListType<T>) -> {T};
@@ -89,7 +92,9 @@ function LinkedList.size<T>(self: InternalLinkedList<T>): number
 end
 
 function LinkedList.copy<T>(self: InternalLinkedList<T>): LinkedListType<T>
-	if self:_isEmpty() then error("Cannot copy from empty LinkedList.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty LinkedList.")
+    end
 	local copy = LinkedList.new() :: InternalLinkedList<T>
 	local current = self._first
 	while current do
@@ -198,7 +203,7 @@ function LinkedList.insertAt<T>(self: InternalLinkedList<T>, index: number, valu
 	end
 	
 	local current = self._first
-	for i = 0, index - 1 do
+	for _ = 0, index - 1 do
 		current = current and current.next or nil
 	end
 	
@@ -221,7 +226,7 @@ function LinkedList.removeAt<T>(self: InternalLinkedList<T>, index: number): T?
 	end
 	
 	local current = self._first
-	for i = 0, index - 1 do
+	for _ = 0, index - 1 do
 		current = current and current.next or nil
 	end
 	
@@ -253,7 +258,7 @@ function LinkedList.get<T>(self: InternalLinkedList<T>, index: number): T?
 	end
 	
 	local current = self._first
-	for i = 0, index - 1 do
+	for _ = 0, index - 1 do
 		current = current and current.next or nil
 	end
 	
@@ -266,7 +271,7 @@ function LinkedList.set<T>(self: InternalLinkedList<T>, index: number, value: T)
 	end
 	
 	local current = self._first
-	for i = 0, index - 1 do
+	for _ = 0, index - 1 do
 		current = current and current.next or nil
 	end
 	

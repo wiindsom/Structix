@@ -81,7 +81,9 @@ function Set.size<T>(self: InternalSet<T>): number
 end
 
 function Set.copy<T>(self: InternalSet<T>): SetType<T>
-	if self:_isEmpty() then error("Cannot copy from empty Set.") end
+	if self:_isEmpty() then
+        error("Cannot copy from empty Set.")
+    end
 	local copy = Set.new() :: InternalSet<T>
 	copy._set = table.clone(self._set)
 	return copy
@@ -161,7 +163,9 @@ function Set.discard<T>(self: InternalSet<T>, value: T)
 end
 
 function Set.pop<T>(self: InternalSet<T>): T?
-	if self:_isEmpty() then error("Cannot pop from empty set.") end
+	if self:_isEmpty() then
+        error("Cannot pop from empty set.")
+    end
 	local temporary = {}
 	for key in self._set do
 		table.insert(temporary, key)
@@ -173,7 +177,9 @@ function Set.pop<T>(self: InternalSet<T>): T?
 end
 
 function Set.union<T>(self: InternalSet<T>, otherSet: InternalSet<T>): SetType<T>
-	if self == otherSet then warn("Attempted to unite with self.") end
+	if rawequal(self, otherSet) then
+        warn("Attempted to unite with self.")
+    end
 	local result = Set.new() :: InternalSet<T>
 	for key in self._set do
 		result._set[key] = true
@@ -185,7 +191,9 @@ function Set.union<T>(self: InternalSet<T>, otherSet: InternalSet<T>): SetType<T
 end
 
 function Set.intersection<T>(self: InternalSet<T>, otherSet: InternalSet<T>): SetType<T>
-	if self == otherSet then warn("Attempted to intersect with self.") end
+	if rawequal(self, otherSet) then
+        warn("Attempted to intersect with self.")
+    end
 	local result = Set.new() :: InternalSet<T>
 	for key in self._set do
 		if otherSet:contains(key) then
@@ -196,7 +204,9 @@ function Set.intersection<T>(self: InternalSet<T>, otherSet: InternalSet<T>): Se
 end
 
 function Set.difference<T>(self: InternalSet<T>, otherSet: InternalSet<T>): SetType<T>
-	if self == otherSet then warn("Attempted to differentiate with self.") end
+	if rawequal(self, otherSet) then
+        warn("Attempted to differentiate with self.")
+    end
 	local result = Set.new() :: InternalSet<T>
 	for key in self._set do
 		if not otherSet:contains(key) then
@@ -207,7 +217,9 @@ function Set.difference<T>(self: InternalSet<T>, otherSet: InternalSet<T>): SetT
 end
 
 function Set.symmetric_Difference<T>(self: InternalSet<T>, otherSet: InternalSet<T>): SetType<T>
-	if self == otherSet then warn("Attempted to symmetric-difference a set with self.") end
+	if rawequal(self, otherSet) then
+        warn("Attempted to symmetric-difference a set with self.")
+    end
 	local result = Set.new() :: InternalSet<T>
 	for key in self._set do
 		if not otherSet:contains(key) then
