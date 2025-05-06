@@ -13,3 +13,7 @@ copyright = "Fully Open Source Under The MIT License."
 title = "Structix"
 tagline = "A Data Structure Library For Roblox."
 
+[[navbar.items]]
+to = "/docs/intro"
+label = "Docs"
+position = "left"
