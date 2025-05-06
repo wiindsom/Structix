@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[668],{7676:e=>{e.exports=JSON.parse('[{"type":"link","href":"/api/BinaryTree","label":"\u200bBinary\u200bTree"},{"type":"link","href":"/api/Collection","label":"\u200bCollection"}]')}}]);
