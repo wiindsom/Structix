@@ -1,7 +1,7 @@
 <h1>
-  Structix:
+  Structix
 </h1>
 
-<h2>
-    A roblox datastructure library.
-</h2>
+<h3>
+    A Data Structure Library For Roblox.
+</h3>

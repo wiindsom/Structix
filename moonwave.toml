@@ -3,11 +3,14 @@ gitSourceBranch = "main"
 
 [home]
 enabled = true
-includeReadme = false
+includeReadme = true
+
+[[home.features]]
+title = "Something"
+description = "yuh"
 
 [docusaurus]
 tagline = "A Data Structure Library For Roblox."
-
 
 [footer]
 style = "dark"
