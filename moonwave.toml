@@ -12,16 +12,4 @@ copyright = "Fully Open Source Under The MIT License."
 [docusaurus]
 title = "Structix"
 tagline = "A Data Structure Library For Roblox."
-headTags = [
-  { tagName = "meta", attributes = { property = "og:title", content = "Structix" } },
-  { tagName = "meta", attributes = { name = "twitter:title", content = "Structix" } },
-  { tagName = "meta", attributes = { property = "og:site_name", content = "wiindsom" } },
-  { tagName = "meta", attributes = { property = "og:description", content = "A data structure library for Roblox developers." } },
-  { tagName = "meta", attributes = { name = "twitter:description", content = "A data structure library for Roblox developers." } },
-  { tagName = "meta", attributes = { property = "og:url", content = "https://wiindsom.github.io/Structix/" } },
-  { tagName = "meta", attributes = { property = "og:image", content = "https://wiindsom.github.io/Structix/og-image.jpg" } },
-  { tagName = "meta", attributes = { name = "twitter:image", content = "https://wiindsom.github.io/Structix/og-image.jpg" } },
-  { tagName = "meta", attributes = { property = "og:type", content = "website" } },
-  { tagName = "meta", attributes = { name = "twitter:card", content = "summary_large_image" } },
-  { tagName = "meta", attributes = { name = "theme-color", content = "#B19CD7" } }
-]
+
