@@ -7,3 +7,5 @@ empty.rbxl
 /*.rbxl.lock
 
 **/sourcemap.json
+
+build/

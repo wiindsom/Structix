@@ -26,7 +26,8 @@ type BinaryTree<T = {}> = T & {
 }
 
 ------------------------------------------------------------------------------
-
+--- @class BinaryTree
+--- Binary tree class
 local BinaryTree = {} :: BinaryTree<{
 	new: <T>() -> BinaryTreeType<T>;
 }>
@@ -63,6 +64,12 @@ function BinaryTree._isEmpty<T>(self: InternalBinaryTree<T>): boolean
 	return self._size == 0
 end
 
+--[=[
+    Creates a new empty binary tree.
+
+    @within BinaryTree
+    @return BinaryTreeType<T> -- Empty binary tree instance.
+]=]
 function BinaryTree.new<T>(): BinaryTreeType<T>
 	local self = {
 		_size = 0;
@@ -71,7 +78,12 @@ function BinaryTree.new<T>(): BinaryTreeType<T>
 	return self
 end
 
+--[=[
+    Returns the full contents of the binary tree in pre-order (root-left-right) traversal.
 
+    @within BinaryTree
+    @return {T} -- An array containing all values in pre-order.
+]=]
 function BinaryTree.getBinaryTree<T>(self: InternalBinaryTree<T>): {T}
 	local result = {}
 	local function build(node: Node<T>?)
@@ -84,10 +96,23 @@ function BinaryTree.getBinaryTree<T>(self: InternalBinaryTree<T>): {T}
 	return result
 end
 
+--[=[
+    Returns the number of elements in the binary tree.
+
+    @within BinaryTree
+    @return number -- The number of elements currently in the tree.
+]=]
 function BinaryTree.size<T>(self: InternalBinaryTree<T>): number
 	return self._size
 end
 
+--[=[
+    Creates a deep copy of the binary tree.
+    If binary tree is empty, it will error.
+
+    @within BinaryTree
+    @return BinaryTreeType<T> -- A new binary tree containing all elements from the original.
+]=]
 function BinaryTree.copy<T>(self: InternalBinaryTree<T>): BinaryTreeType<T>
 	if self:_isEmpty() then
         error("Cannot copy from empty BinaryTree.")
@@ -103,11 +128,22 @@ function BinaryTree.copy<T>(self: InternalBinaryTree<T>): BinaryTreeType<T>
 	return copy
 end
 
+--[=[
+    Removes all elements from the binary tree.
+    
+    @within BinaryTree
+]=]
 function BinaryTree.clear<T>(self: InternalBinaryTree<T>)
 	self._root = nil
 	self._size = 0
 end
 
+--[=[
+    Inserts a new value into the binary tree, preserving the binary search tree property.
+
+    @within BinaryTree
+    @param value T -- The value to insert into the tree.
+]=]
 function BinaryTree.insert<T>(self: InternalBinaryTree<T>, value: T)
 	local function insertNode(node: Node<T>?, nodeValue: T): Node<T>
 		if not node then
@@ -124,6 +160,13 @@ function BinaryTree.insert<T>(self: InternalBinaryTree<T>, value: T)
 	self._size += 1
 end
 
+--[=[
+    Checks whether a value exists in the tree.
+
+    @within BinaryTree
+    @param value T -- The value to search for.
+    @return boolean -- true if the value exists in the tree, otherwise false.
+]=]
 function BinaryTree.contains<T>(self: InternalBinaryTree<T>, value: T): boolean
 	local function search(node: Node<T>?, nodeValue: T): boolean
 		if not node then return false end
@@ -137,6 +180,13 @@ function BinaryTree.contains<T>(self: InternalBinaryTree<T>, value: T): boolean
 	return search(self._root, value)
 end
 
+--[=[
+    Removes a value from the binary tree if it exists.
+    Will warn if the value is not in the binary tree.
+
+    @within BinaryTree
+    @param value T -- The value to remove from the tree.
+]=]
 function BinaryTree.remove<T>(self: InternalBinaryTree<T>, value: T)
 	local function removeNode(node: Node<T>?, nodeValue: T): (Node<T>?, boolean)
 		if not node then
@@ -176,6 +226,12 @@ function BinaryTree.remove<T>(self: InternalBinaryTree<T>, value: T)
 	end
 end
 
+--[=[
+    Returns the smallest value in the binary tree.
+    
+    @within BinaryTree
+    @return T? -- The minimum value, or nil if the tree is empty.
+]=]
 function BinaryTree.min<T>(self: InternalBinaryTree<T>): T?
 	local current = self._root
 	if not current then return nil end
@@ -185,6 +241,12 @@ function BinaryTree.min<T>(self: InternalBinaryTree<T>): T?
 	return current.value
 end
 
+--[=[
+    Returns the largest value in the binary tree.
+
+    @within BinaryTree
+    @return T? -- The maximum value, or nil if the tree is empty.
+]=]
 function BinaryTree.max<T>(self: InternalBinaryTree<T>): T?
 	local current = self._root
 	if not current then return nil end
@@ -194,6 +256,12 @@ function BinaryTree.max<T>(self: InternalBinaryTree<T>): T?
 	return current.value
 end
 
+--[=[
+    Calculates the height of the binary tree.
+
+    @within BinaryTree
+    @return number -- The height of the tree (max depth). Returns -1 if the tree is empty.
+]=]
 function BinaryTree.height<T>(self: InternalBinaryTree<T>): number
 	local function getHeight(node: Node<T>?): number
 		if not node then return -1 end
@@ -202,6 +270,12 @@ function BinaryTree.height<T>(self: InternalBinaryTree<T>): number
 	return getHeight(self._root)
 end
 
+--[=[
+    Returns an in-order (left-root-right) traversal of the tree.
+
+    @within BinaryTree
+    @return {T} -- Array of values in in-order traversal.
+]=]
 function BinaryTree.traverseInOrder<T>(self: InternalBinaryTree<T>): {T}
 	local result = {}
 	local function inorder(node: Node<T>?)
@@ -214,6 +288,12 @@ function BinaryTree.traverseInOrder<T>(self: InternalBinaryTree<T>): {T}
 	return result
 end
 
+--[=[
+    Returns a pre-order (root-left-right) traversal of the tree.
+
+    @within BinaryTree
+    @return {T} -- Array of values in pre-order traversal.
+]=]
 function BinaryTree.traversePreOrder<T>(self: InternalBinaryTree<T>): {T}
 	local result = {}
 	local function preorder(node: Node<T>?)
@@ -226,6 +306,12 @@ function BinaryTree.traversePreOrder<T>(self: InternalBinaryTree<T>): {T}
 	return result
 end
 
+--[=[
+    Returns a post-order (left-right-root) traversal of the tree.
+    
+    @within BinaryTree
+    @return {T} -- Array of values in post-order traversal.
+]=]
 function BinaryTree.traversePostOrder<T>(self: InternalBinaryTree<T>): {T}
 	local result = {}
 	local function postorder(node: Node<T>?)

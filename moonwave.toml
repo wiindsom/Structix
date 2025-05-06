@@ -1,0 +1,9 @@
+gitRepoUrl = "https://github.com/wiindsom/Structix"
+gitSourceBranch = "main"
+
+[home]
+enabled = true
+includeReadme = false
+
+[docusaurus]
+tagline = "A Data Structure Library For Roblox."

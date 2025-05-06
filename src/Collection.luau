@@ -26,7 +26,8 @@ type Collection<T = {}> = T & {
 }
 
 ------------------------------------------------------------------------------
-
+--- @class Collection
+--- Collection class
 local Collection = {} :: Collection<{
 	new: <T>() -> CollectionType<T>;
 }>
