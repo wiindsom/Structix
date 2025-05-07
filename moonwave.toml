@@ -12,3 +12,4 @@ copyright = "Fully Open Source Under The MIT License."
 [docusaurus]
 title = "Structix"
 tagline = "A Data Structure Library For Roblox."
+favicon = "/favicon.ico"
