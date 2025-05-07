@@ -6,23 +6,39 @@ import Layout from "@theme/Layout"
 import clsx from "clsx"
 import styles from "./index.module.css"
 
-const FEATURES = /***features***/
-
-    function Feature({ image, title, description }) {
-        return (
-            <div className={clsx("col col--4")}>
-                {image && (
-                    <div className="text--center">
-                        <img className={styles.featureSvg} alt={title} src={image} />
-                    </div>
-                )}
-                <div className="text--center padding-horiz--md">
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                </div>
-            </div>
-        )
+const FEATURES = [
+    {
+        title: "Fast & Optimized 1",
+        description: "Structix is built with performance in mind, using efficient Lua-based algorithms for blazing-fast data access.",
+        image: "https://cdn-icons-png.flaticon.com/512/733/733609.png"
+    },
+    {
+        title: "Modern API 2",
+        description: "Clean, class-based design with Moonwave documentation and type annotations for clarity and ease of use.",
+        image: "https://cdn-icons-png.flaticon.com/512/733/733609.png"
+    },
+    {
+        title: "Roblox Ready 3",
+        description: "Designed specifically for Roblox developers. 100% compatible with Luau and optimized for DataStores.",
+        image: "https://cdn-icons-png.flaticon.com/512/733/733609.png"
     }
+]
+
+function Feature({ image, title, description }) {
+    return (
+        <div className={clsx("col col--4")}>
+            {image && (
+                <div className="text--center">
+                    <img className={styles.featureSvg} alt={title} src={image} />
+                </div>
+            )}
+            <div className="text--center padding-horiz--md">
+                <h3>{title}</h3>
+                <p>{description}</p>
+            </div>
+        </div>
+    )
+}
 
 export function HomepageFeatures() {
     if (!FEATURES) return null
