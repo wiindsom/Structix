@@ -8,19 +8,19 @@ import styles from "./index.module.css"
 
 const FEATURES = [
     {
-        title: "Fast & Optimized 1",
-        description: "Structix is built with performance in mind, using efficient Lua-based algorithms for blazing-fast data access.",
-        image: "https://cdn-icons-png.flaticon.com/512/733/733609.png"
+        title: "📘Fully Documented API",
+        description: "Structix uses Moonwave to provide rich, typed documentation with clear method descriptions, making it easy to learn and integrate.",
+        image: "https://cdn-icons-png.flaticon.com/512/2014/2014997.png"
     },
     {
-        title: "Modern API 2",
-        description: "Clean, class-based design with Moonwave documentation and type annotations for clarity and ease of use.",
-        image: "https://cdn-icons-png.flaticon.com/512/733/733609.png"
+        title: "🎯Roblox-Centric Design",
+        description: "Designed specifically for Roblox development, Structix follows Luau conventions and plays well with DataStores, state managers, and module loaders.",
+        image: "https://cdn-icons-png.flaticon.com/512/18599/18599433.png"
     },
     {
-        title: "Roblox Ready 3",
-        description: "Designed specifically for Roblox developers. 100% compatible with Luau and optimized for DataStores.",
-        image: "https://cdn-icons-png.flaticon.com/512/733/733609.png"
+        title: "🧠Strict & Predictable Behavior",
+        description: "Every structure somewhat enforces strict typing and safe mutation patterns, helping you avoid hidden bugs and stay in full control of your data.",
+        image: "https://cdn-icons-png.flaticon.com/512/306/306047.png"
     }
 ]
 
