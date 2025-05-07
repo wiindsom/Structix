@@ -10,7 +10,7 @@ const FEATURES = [
     {
         title: "📘Fully Documented API",
         description: "Structix uses Moonwave to provide rich, typed documentation with clear method descriptions, making it easy to learn and integrate.",
-        image: "https://cdn-icons-png.flaticon.com/512/2014/2014997.png"
+        image: "https://cdn-icons-png.flaticon.com/512/4708/4708375.png"
     },
     {
         title: "🎯Roblox-Centric Design",
@@ -20,7 +20,7 @@ const FEATURES = [
     {
         title: "🧠Strict & Predictable Behavior",
         description: "Every structure somewhat enforces strict typing and safe mutation patterns, helping you avoid hidden bugs and stay in full control of your data.",
-        image: "https://cdn-icons-png.flaticon.com/512/306/306047.png"
+        image: "https://cdn-icons-png.flaticon.com/512/11268/11268618.png"
     }
 ]
 
