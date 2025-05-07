@@ -1,11 +1,3 @@
-import React from 'react';
-import Head from '@docusaurus/Head';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Layout from '@theme/Layout';
-import clsx from 'clsx';
-import styles from './index.module.css';
-
 import Link from "@docusaurus/Link"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import Layout from "@theme/Layout"
