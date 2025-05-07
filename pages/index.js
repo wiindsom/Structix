@@ -74,6 +74,9 @@ function HomepageHeader() {
             <div className="container">
                 <h1 className={titleClassName}>{siteConfig.title}</h1>
                 <p className={taglineClassName}>{siteConfig.tagline}</p>
+                <p style={{ fontSize: '1rem', color: 'var(--ifm-color-secondary)' }}>
+                    🌟Built by <a href="https://github.com/wiindsom" target="_blank" rel="noopener noreferrer">wiindsom</a>🌟
+                </p>
                 <div className={styles.buttons}>
                     <Link
                         className="button button--secondary button--lg"
