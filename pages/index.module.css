@@ -49,3 +49,9 @@
     text-shadow: 0px 2px 4px rgb(0, 0, 0);
     color: var(--ifm-color-gray-100);
 }
+
+.credit {
+    font-size: 1rem;
+    font-weight: 640;
+}
+
