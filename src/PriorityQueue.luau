@@ -1,39 +1,43 @@
 --!strict
 type PriorityModes = "min" | "max"
 export type PriorityQueueType<T> = {
-	getPriorityQueue: (self: PriorityQueueType<T>) -> {{value: T, priority: number}};
-	size: (self: PriorityQueueType<T>) -> number;
-	copy: (self: PriorityQueueType<T>) -> PriorityQueueType<T>;
-	clear: (self: PriorityQueueType<T>) -> ();
-	enqueue: (self: PriorityQueueType<T>, value: T, priority: number) -> ();
-	dequeue: (self: PriorityQueueType<T>) -> T?;
-	peek: (self: PriorityQueueType<T>) -> T?;
+	getPriorityQueue: (self: PriorityQueueType<T>) -> { { value: T, priority: number } },
+	size: (self: PriorityQueueType<T>) -> number,
+	copy: (self: PriorityQueueType<T>) -> PriorityQueueType<T>,
+	clear: (self: PriorityQueueType<T>) -> (),
+	enqueue: (self: PriorityQueueType<T>, value: T, priority: number) -> (),
+	dequeue: (self: PriorityQueueType<T>) -> T?,
+	peek: (self: PriorityQueueType<T>) -> T?,
 }
-
 type InternalPriorityQueue<T> = PriorityQueueType<T> & {
-	_heap: {{value: T, priority: number}};
-	_mode: PriorityModes;
-	_comparator: ((a: number, b: number) -> boolean)?;
-	_valueType: string?;
-	
-	_isEmpty: (self: InternalPriorityQueue<T>) -> boolean;
-	_compare: (self: InternalPriorityQueue<T>, i: number, j: number) -> boolean;
-	_heapifyUp: (self: InternalPriorityQueue<T>, index: number) -> ();
-	_heapifyDown: (self: InternalPriorityQueue<T>, index: number) -> ();
+	_heap: { { value: T, priority: number } },
+	_mode: PriorityModes,
+	_comparator: ((a: number, b: number) -> boolean)?,
+	_valueType: string?,
+
+	_isEmpty: (self: InternalPriorityQueue<T>) -> boolean,
+	_compare: (self: InternalPriorityQueue<T>, i: number, j: number) -> boolean,
+	_heapifyUp: (self: InternalPriorityQueue<T>, index: number) -> (),
+	_heapifyDown: (self: InternalPriorityQueue<T>, index: number) -> (),
 }
 type PriorityQueue<T = {}> = T & {
-	[string]: any;
+	[string]: any,
 }
 
 ------------------------------------------------------------------------------
-
+--- @class PriorityQueue
+--- PriorityQueue class
 local PriorityQueue = {} :: PriorityQueue<{
-	new: <T>(mode: PriorityModes?, comparator: ((a: number, b: number) -> boolean)?) -> PriorityQueueType<T>;
+	new: <T>(mode: PriorityModes?, comparator: ((a: number, b: number) -> boolean)?) -> PriorityQueueType<T>,
 }>
 PriorityQueue["__index"] = PriorityQueue
 PriorityQueue["__eq"] = function<T>(self: InternalPriorityQueue<T>, other: InternalPriorityQueue<T>): boolean
-	if rawequal(self, other) then return true end
-	if self:size() ~= other:size() then return false end
+	if rawequal(self, other) then
+		return true
+	end
+	if self:size() ~= other:size() then
+		return false
+	end
 	for i = 1, #self._heap do
 		local a = self._heap[i]
 		local b = other._heap[i]
@@ -48,7 +52,7 @@ PriorityQueue["__tostring"] = function<T>(self: InternalPriorityQueue<T>): strin
 	for _, entry in self._heap do
 		table.insert(parts, `({tostring(entry.value)}:{entry.priority})`)
 	end
-	return "["..table.concat(parts, ", ").."]"
+	return "[" .. table.concat(parts, ", ") .. "]"
 end
 
 function PriorityQueue._isEmpty<T>(self: InternalPriorityQueue<T>): boolean
@@ -84,15 +88,15 @@ function PriorityQueue._heapifyDown<T>(self: InternalPriorityQueue<T>, index: nu
 		local left = 2 * index
 		local right = left + 1
 		local best = index
-		
+
 		if left <= size and self:_compare(left, best) then
 			best = left
 		end
-		
+
 		if right <= size and self:_compare(right, best) then
 			best = right
 		end
-		
+
 		if best ~= index then
 			self._heap[index], self._heap[best] = self._heap[best], self._heap[index]
 			index = best
@@ -102,22 +106,36 @@ function PriorityQueue._heapifyDown<T>(self: InternalPriorityQueue<T>, index: nu
 	end
 end
 
+--[=[
+	Creates a new empty priority queue.
+
+	@within PriorityQueue
+	@param mode? "min" | "max" -- The priority behavior mode. Defaults to `"min"`.
+	@param comparator? (a: number, b: number) -> boolean -- Optional comparator to customize ordering.
+	@return PriorityQueueType<T>
+]=]
 function PriorityQueue.new<T>(mode: PriorityModes?, comparator: ((a: number, b: number) -> boolean)?): PriorityQueueType<T>
 	mode = mode or "min"
 	if mode ~= "min" and mode ~= "max" then
 		error(`Invalid mode: {mode}`)
 	end
-	
+
 	local self = {
-		_heap = {};
-		_mode = mode;
-		_comparator = comparator;
+		_heap = {},
+		_mode = mode,
+		_comparator = comparator,
 	} :: InternalPriorityQueue<T>
 	setmetatable(self, PriorityQueue)
 	return self
 end
 
-function PriorityQueue.getPriorityQueue<T>(self: InternalPriorityQueue<T>): {{value: T, priority: number}}
+--[=[
+	Returns a shallow copy of the internal heap array, preserving value-priority pairs.
+
+	@within PriorityQueue
+	@return { { value: T, priority: number } }
+]=]
+function PriorityQueue.getPriorityQueue<T>(self: InternalPriorityQueue<T>): { { value: T, priority: number } }
 	local copy = table.create(#self._heap)
 	for i, item in self._heap do
 		copy[i] = { value = item.value, priority = item.priority }
@@ -125,14 +143,26 @@ function PriorityQueue.getPriorityQueue<T>(self: InternalPriorityQueue<T>): {{va
 	return copy
 end
 
+--[=[
+	Returns the number of elements in the priority queue.
+
+	@within PriorityQueue
+	@return number
+]=]
 function PriorityQueue.size<T>(self: InternalPriorityQueue<T>): number
 	return #self._heap
 end
 
+--[=[
+	Returns a deep copy of the current priority queue. Throws an error if the priority queue is empty.
+
+	@within PriorityQueue
+	@return PriorityQueueType<T>
+]=]
 function PriorityQueue.copy<T>(self: InternalPriorityQueue<T>): PriorityQueueType<T>
 	if self:_isEmpty() then
-        error("Cannot copy from empty PriorityQueue.")
-    end
+		error("Cannot copy from empty PriorityQueue.")
+	end
 	local newQueue = PriorityQueue.new() :: InternalPriorityQueue<T>
 	for i, item in self._heap do
 		newQueue._heap[i] = { value = item.value, priority = item.priority }
@@ -140,10 +170,22 @@ function PriorityQueue.copy<T>(self: InternalPriorityQueue<T>): PriorityQueueTyp
 	return newQueue
 end
 
+--[=[
+	Removes all elements from the queue.
+
+	@within PriorityQueue
+]=]
 function PriorityQueue.clear<T>(self: InternalPriorityQueue<T>)
 	table.clear(self._heap)
 end
 
+--[=[
+	Inserts a value into the queue with the specified priority.
+
+	@within PriorityQueue
+	@param value T -- The value to enqueue.
+	@param priority number -- The priority of the value.
+]=]
 function PriorityQueue.enqueue<T>(self: InternalPriorityQueue<T>, value: T, priority: number)
 	local valueType = typeof(value)
 	if not self._comparator then
@@ -160,8 +202,16 @@ function PriorityQueue.enqueue<T>(self: InternalPriorityQueue<T>, value: T, prio
 	self:_heapifyUp(#self._heap)
 end
 
+--[=[
+	Removes and returns the value with the highest priority (depending on mode).
+
+	@within PriorityQueue
+	@return T? -- Returns the dequeued value or nil if the queue is empty.
+]=]
 function PriorityQueue.dequeue<T>(self: InternalPriorityQueue<T>): T?
-	if self:_isEmpty() then return nil end
+	if self:_isEmpty() then
+		return nil
+	end
 	local root = self._heap[1]
 	local last = table.remove(self._heap)
 	if #self._heap > 0 and last then
@@ -171,8 +221,16 @@ function PriorityQueue.dequeue<T>(self: InternalPriorityQueue<T>): T?
 	return root.value
 end
 
+--[=[
+	Returns the value with the highest priority without removing it.
+
+	@within PriorityQueue
+	@return T? -- Returns the value or nil if the queue is empty.
+]=]
 function PriorityQueue.peek<T>(self: InternalPriorityQueue<T>): T?
-	if self:_isEmpty() then return nil end
+	if self:_isEmpty() then
+		return nil
+	end
 	return self._heap[1].value
 end
 

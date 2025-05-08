@@ -1,39 +1,41 @@
 --!strict
-type Node<T> = {value: T; left: Node<T>?; right: Node<T>?}
+type Node<T> = { value: T, left: Node<T>?, right: Node<T>? }
 export type BinaryTreeType<T> = {
-	getBinaryTree: (self: BinaryTreeType<T>) -> {T};
-	size: (self: BinaryTreeType<T>) -> number;
-	copy: (self: BinaryTreeType<T>) -> BinaryTreeType<T>;
-	clear: (self: BinaryTreeType<T>) -> ();
-	insert: (self: BinaryTreeType<T>, value: T) -> ();
-	contains: (self: BinaryTreeType<T>, value: T) -> boolean;
-	remove: (self: BinaryTreeType<T>, value: T) -> ();
-	min: (self: BinaryTreeType<T>) -> T?;
-	max: (self: BinaryTreeType<T>) -> T?;
-	height: (self: BinaryTreeType<T>) -> number;
-	traverseInOrder: (self: BinaryTreeType<T>) -> {T};
-	traversePreOrder: (self: BinaryTreeType<T>) -> {T};
-	traversePostOrder: (self: BinaryTreeType<T>) -> {T};
+	getBinaryTree: (self: BinaryTreeType<T>) -> { T },
+	size: (self: BinaryTreeType<T>) -> number,
+	copy: (self: BinaryTreeType<T>) -> BinaryTreeType<T>,
+	clear: (self: BinaryTreeType<T>) -> (),
+	insert: (self: BinaryTreeType<T>, value: T) -> (),
+	contains: (self: BinaryTreeType<T>, value: T) -> boolean,
+	remove: (self: BinaryTreeType<T>, value: T) -> (),
+	min: (self: BinaryTreeType<T>) -> T?,
+	max: (self: BinaryTreeType<T>) -> T?,
+	height: (self: BinaryTreeType<T>) -> number,
+	traverseInOrder: (self: BinaryTreeType<T>) -> { T },
+	traversePreOrder: (self: BinaryTreeType<T>) -> { T },
+	traversePostOrder: (self: BinaryTreeType<T>) -> { T },
 }
 type InternalBinaryTree<T> = BinaryTreeType<T> & {
-	_root: Node<T>?;
-	_size: number;
-	
-	_isEmpty: (self: InternalBinaryTree<T>) -> boolean;
+	_root: Node<T>?,
+	_size: number,
+
+	_isEmpty: (self: InternalBinaryTree<T>) -> boolean,
 }
 type BinaryTree<T = {}> = T & {
-	[string]: any;
+	[string]: any,
 }
 
 ------------------------------------------------------------------------------
 --- @class BinaryTree
---- Binary tree class
+--- BinaryTree class
 local BinaryTree = {} :: BinaryTree<{
-	new: <T>() -> BinaryTreeType<T>;
+	new: <T>() -> BinaryTreeType<T>,
 }>
 BinaryTree["__index"] = BinaryTree
 BinaryTree["__eq"] = function<T>(self: InternalBinaryTree<T>, other: InternalBinaryTree<T>): boolean
-	if rawequal(self, other) then return true end
+	if rawequal(self, other) then
+		return true
+	end
 	local function areEqual(nodeA: Node<T>?, nodeB: Node<T>?): boolean
 		if not nodeA and not nodeB then
 			return true
@@ -51,13 +53,15 @@ end
 BinaryTree["__tostring"] = function<T>(self: InternalBinaryTree<T>): string
 	local elements = {}
 	local function inorder(node: Node<T>?)
-		if not node then return end
+		if not node then
+			return
+		end
 		inorder(node.left)
 		table.insert(elements, tostring(node.value))
 		inorder(node.right)
 	end
 	inorder(self._root)
-	return "(InOrder): ["..table.concat(elements, ", ").."]"
+	return "(InOrder): [" .. table.concat(elements, ", ") .. "]"
 end
 
 function BinaryTree._isEmpty<T>(self: InternalBinaryTree<T>): boolean
@@ -72,7 +76,7 @@ end
 ]=]
 function BinaryTree.new<T>(): BinaryTreeType<T>
 	local self = {
-		_size = 0;
+		_size = 0,
 	} :: InternalBinaryTree<T>
 	setmetatable(self, BinaryTree)
 	return self
@@ -82,12 +86,14 @@ end
     Returns the full contents of the binary tree in pre-order (root-left-right) traversal.
 
     @within BinaryTree
-    @return {T} -- An array containing all values in pre-order.
+    @return { T } -- An array containing all values in pre-order.
 ]=]
-function BinaryTree.getBinaryTree<T>(self: InternalBinaryTree<T>): {T}
+function BinaryTree.getBinaryTree<T>(self: InternalBinaryTree<T>): { T }
 	local result = {}
 	local function build(node: Node<T>?)
-		if not node then return end
+		if not node then
+			return
+		end
 		table.insert(result, node.value)
 		build(node.left)
 		build(node.right)
@@ -107,19 +113,20 @@ function BinaryTree.size<T>(self: InternalBinaryTree<T>): number
 end
 
 --[=[
-    Creates a deep copy of the binary tree.
-    If binary tree is empty, it will error.
+    Creates a deep copy of the binary tree. Throws an error if the binary tree is empty.
 
     @within BinaryTree
     @return BinaryTreeType<T> -- A new binary tree containing all elements from the original.
 ]=]
 function BinaryTree.copy<T>(self: InternalBinaryTree<T>): BinaryTreeType<T>
 	if self:_isEmpty() then
-        error("Cannot copy from empty BinaryTree.")
-    end
+		error("Cannot copy from empty BinaryTree.")
+	end
 	local copy = BinaryTree.new() :: InternalBinaryTree<T>
 	local function clone(node: Node<T>?)
-		if not node then return end
+		if not node then
+			return
+		end
 		copy:insert(node.value)
 		clone(node.left)
 		clone(node.right)
@@ -147,7 +154,7 @@ end
 function BinaryTree.insert<T>(self: InternalBinaryTree<T>, value: T)
 	local function insertNode(node: Node<T>?, nodeValue: T): Node<T>
 		if not node then
-			return {value = nodeValue}
+			return { value = nodeValue }
 		end
 		if (nodeValue :: any) < (node.value :: any) then
 			node.left = insertNode(node.left, nodeValue)
@@ -169,8 +176,12 @@ end
 ]=]
 function BinaryTree.contains<T>(self: InternalBinaryTree<T>, value: T): boolean
 	local function search(node: Node<T>?, nodeValue: T): boolean
-		if not node then return false end
-		if nodeValue == node.value then return true end
+		if not node then
+			return false
+		end
+		if nodeValue == node.value then
+			return true
+		end
 		if (nodeValue :: any) < (node.value :: any) then
 			return search(node.left, nodeValue)
 		else
@@ -234,7 +245,9 @@ end
 ]=]
 function BinaryTree.min<T>(self: InternalBinaryTree<T>): T?
 	local current = self._root
-	if not current then return nil end
+	if not current then
+		return nil
+	end
 	while current.left do
 		current = current.left
 	end
@@ -249,7 +262,9 @@ end
 ]=]
 function BinaryTree.max<T>(self: InternalBinaryTree<T>): T?
 	local current = self._root
-	if not current then return nil end
+	if not current then
+		return nil
+	end
 	while current.right do
 		current = current.right
 	end
@@ -264,7 +279,9 @@ end
 ]=]
 function BinaryTree.height<T>(self: InternalBinaryTree<T>): number
 	local function getHeight(node: Node<T>?): number
-		if not node then return -1 end
+		if not node then
+			return -1
+		end
 		return 1 + math.max(getHeight(node.left), getHeight(node.right))
 	end
 	return getHeight(self._root)
@@ -274,12 +291,14 @@ end
     Returns an in-order (left-root-right) traversal of the tree.
 
     @within BinaryTree
-    @return {T} -- Array of values in in-order traversal.
+    @return { T } -- Array of values in in-order traversal.
 ]=]
-function BinaryTree.traverseInOrder<T>(self: InternalBinaryTree<T>): {T}
+function BinaryTree.traverseInOrder<T>(self: InternalBinaryTree<T>): { T }
 	local result = {}
 	local function inorder(node: Node<T>?)
-		if not node then return end
+		if not node then
+			return
+		end
 		inorder(node.left)
 		table.insert(result, node.value)
 		inorder(node.right)
@@ -292,12 +311,14 @@ end
     Returns a pre-order (root-left-right) traversal of the tree.
 
     @within BinaryTree
-    @return {T} -- Array of values in pre-order traversal.
+    @return { T } -- Array of values in pre-order traversal.
 ]=]
-function BinaryTree.traversePreOrder<T>(self: InternalBinaryTree<T>): {T}
+function BinaryTree.traversePreOrder<T>(self: InternalBinaryTree<T>): { T }
 	local result = {}
 	local function preorder(node: Node<T>?)
-		if not node then return end
+		if not node then
+			return
+		end
 		table.insert(result, node.value)
 		preorder(node.left)
 		preorder(node.right)
@@ -310,12 +331,14 @@ end
     Returns a post-order (left-right-root) traversal of the tree.
     
     @within BinaryTree
-    @return {T} -- Array of values in post-order traversal.
+    @return { T } -- Array of values in post-order traversal.
 ]=]
-function BinaryTree.traversePostOrder<T>(self: InternalBinaryTree<T>): {T}
+function BinaryTree.traversePostOrder<T>(self: InternalBinaryTree<T>): { T }
 	local result = {}
 	local function postorder(node: Node<T>?)
-		if not node then return end
+		if not node then
+			return
+		end
 		postorder(node.left)
 		postorder(node.right)
 		table.insert(result, node.value)
