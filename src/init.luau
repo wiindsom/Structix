@@ -1,4 +1,6 @@
 --!strict
+-- https://github.com/wiindsom/Structix
+-- <3 wiindsom
 
 local BinaryTree = require(script.BinaryTree)
 local Collection = require(script.Collection)
