@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[956],{84410:s=>{s.exports=JSON.parse('{"sourceUrl":"https://github.com/wiindsom/Structix/blob/main","baseUrl":"/Structix/","classOrder":[],"apiCategories":[]}')}}]);
