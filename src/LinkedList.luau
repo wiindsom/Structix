@@ -72,10 +72,10 @@ function LinkedList._isEmpty<T>(self: InternalLinkedList<T>): boolean
 end
 
 --[=[
-    Creates a new empty linked list.
+	Creates a new empty linked list.
 
-    @within LinkedList
-    @return LinkedListType<T>
+	@within LinkedList
+	@return LinkedListType<T>
 ]=]
 function LinkedList.new<T>(): LinkedListType<T>
 	local self = {
@@ -86,10 +86,10 @@ function LinkedList.new<T>(): LinkedListType<T>
 end
 
 --[=[
-    Returns the contents of the linked list as an array.
+	Returns the contents of the linked list as an array.
 
-    @within LinkedList
-    @return { T } -- Array of values in the linked list.
+	@within LinkedList
+	@return { T } -- Array of values in the linked list.
 ]=]
 function LinkedList.getLinkedList<T>(self: InternalLinkedList<T>): { T }
 	local result = table.create(self._size)
@@ -102,20 +102,20 @@ function LinkedList.getLinkedList<T>(self: InternalLinkedList<T>): { T }
 end
 
 --[=[
-    Returns the number of elements in the list.
+	Returns the number of elements in the list.
 
-    @within LinkedList
-    @return number
+	@within LinkedList
+	@return number
 ]=]
 function LinkedList.size<T>(self: InternalLinkedList<T>): number
 	return self._size
 end
 
 --[=[
-    Returns a deep copy of the linked list. Throws an error if the linked list is empty.
+	Returns a deep copy of the linked list. Throws an error if the linked list is empty.
 
-    @within LinkedList
-    @return LinkedListType<T>
+	@within LinkedList
+	@return LinkedListType<T>
 ]=]
 function LinkedList.copy<T>(self: InternalLinkedList<T>): LinkedListType<T>
 	if self:_isEmpty() then
@@ -131,9 +131,9 @@ function LinkedList.copy<T>(self: InternalLinkedList<T>): LinkedListType<T>
 end
 
 --[=[
-    Clears all elements from the linked list.
+	Clears all elements from the linked list.
 
-    @within LinkedList
+	@within LinkedList
 ]=]
 function LinkedList.clear<T>(self: InternalLinkedList<T>)
 	self._first = nil
@@ -142,10 +142,10 @@ function LinkedList.clear<T>(self: InternalLinkedList<T>)
 end
 
 --[=[
-    Inserts a value at the beginning of the list.
+	Inserts a value at the beginning of the list.
 
-    @within LinkedList
-    @param value T
+	@within LinkedList
+	@param value T
 ]=]
 function LinkedList.insertFirst<T>(self: InternalLinkedList<T>, value: T)
 	local newNode: Node<T> = { value = value, next = nil, previous = nil }
@@ -163,10 +163,10 @@ function LinkedList.insertFirst<T>(self: InternalLinkedList<T>, value: T)
 end
 
 --[=[
-    Inserts a value at the end of the list.
+	Inserts a value at the end of the list.
 
-    @within LinkedList
-    @param value T
+	@within LinkedList
+	@param value T
 ]=]
 function LinkedList.insertLast<T>(self: InternalLinkedList<T>, value: T)
 	local newNode: Node<T> = { value = value, next = nil, previous = nil }
@@ -184,10 +184,10 @@ function LinkedList.insertLast<T>(self: InternalLinkedList<T>, value: T)
 end
 
 --[=[
-    Removes and returns the first value in the list.
+	Removes and returns the first value in the list.
 
-    @within LinkedList
-    @return T?
+	@within LinkedList
+	@return T?
 ]=]
 function LinkedList.removeFirst<T>(self: InternalLinkedList<T>): T?
 	if self:_isEmpty() then
@@ -208,10 +208,10 @@ function LinkedList.removeFirst<T>(self: InternalLinkedList<T>): T?
 end
 
 --[=[
-    Removes and returns the last value in the list.
+	Removes and returns the last value in the list.
 
-    @within LinkedList
-    @return T?
+	@within LinkedList
+	@return T?
 ]=]
 function LinkedList.removeLast<T>(self: InternalLinkedList<T>): T?
 	if self:_isEmpty() then
@@ -232,10 +232,10 @@ function LinkedList.removeLast<T>(self: InternalLinkedList<T>): T?
 end
 
 --[=[
-    Returns the first value without removing it.
+	Returns the first value without removing it.
 
-    @within LinkedList
-    @return T?
+	@within LinkedList
+	@return T?
 ]=]
 function LinkedList.peekFirst<T>(self: InternalLinkedList<T>): T?
 	if self:_isEmpty() then
@@ -245,10 +245,10 @@ function LinkedList.peekFirst<T>(self: InternalLinkedList<T>): T?
 end
 
 --[=[
-    Returns the last value without removing it.
+	Returns the last value without removing it.
 
-    @within LinkedList
-    @return T?
+	@within LinkedList
+	@return T?
 ]=]
 function LinkedList.peekLast<T>(self: InternalLinkedList<T>): T?
 	if self:_isEmpty() then
@@ -258,11 +258,11 @@ function LinkedList.peekLast<T>(self: InternalLinkedList<T>): T?
 end
 
 --[=[
-    Checks if the list contains a given value.
+	Checks if the list contains a given value.
 
-    @within LinkedList
-    @param value T
-    @return boolean
+	@within LinkedList
+	@param value T
+	@return boolean
 ]=]
 function LinkedList.contains<T>(self: InternalLinkedList<T>, value: T): boolean
 	local current = self._first
@@ -276,11 +276,11 @@ function LinkedList.contains<T>(self: InternalLinkedList<T>, value: T): boolean
 end
 
 --[=[
-    Inserts a value at a specific index.
+	Inserts a value at a specific index.
 
-    @within LinkedList
-    @param index number
-    @param value T
+	@within LinkedList
+	@param index number
+	@param value T
 ]=]
 function LinkedList.insertAt<T>(self: InternalLinkedList<T>, index: number, value: T)
 	if index < 0 or index > self._size then
@@ -314,11 +314,11 @@ function LinkedList.insertAt<T>(self: InternalLinkedList<T>, index: number, valu
 end
 
 --[=[
-    Removes and returns the value at a specific index.
+	Removes and returns the value at a specific index.
 
-    @within LinkedList
-    @param index number
-    @return T?
+	@within LinkedList
+	@param index number
+	@return T?
 ]=]
 function LinkedList.removeAt<T>(self: InternalLinkedList<T>, index: number): T?
 	if index < 0 or index >= self._size then
@@ -354,11 +354,11 @@ function LinkedList.removeAt<T>(self: InternalLinkedList<T>, index: number): T?
 end
 
 --[=[
-    Gets the value at a specific index.
-    
-    @within LinkedList
-    @param index number
-    @return T?
+	Gets the value at a specific index.
+	
+	@within LinkedList
+	@param index number
+	@return T?
 ]=]
 function LinkedList.get<T>(self: InternalLinkedList<T>, index: number): T?
 	if index < 0 or index >= self._size then
@@ -374,11 +374,11 @@ function LinkedList.get<T>(self: InternalLinkedList<T>, index: number): T?
 end
 
 --[=[
-    Sets the value at a specific index.
+	Sets the value at a specific index.
 
-    @within LinkedList
-    @param index number
-    @param value T
+	@within LinkedList
+	@param index number
+	@param value T
 ]=]
 function LinkedList.set<T>(self: InternalLinkedList<T>, index: number, value: T)
 	if index < 0 or index >= self._size then
@@ -396,9 +396,9 @@ function LinkedList.set<T>(self: InternalLinkedList<T>, index: number, value: T)
 end
 
 --[=[
-    Reverses the order of the list in-place.
+	Reverses the order of the list in-place.
 
-    @within LinkedList
+	@within LinkedList
 ]=]
 function LinkedList.reverse<T>(self: InternalLinkedList<T>)
 	local current = self._first
@@ -418,11 +418,11 @@ function LinkedList.reverse<T>(self: InternalLinkedList<T>)
 end
 
 --[=[
-    Creates a new array by applying a callback to each value.
+	Creates a new array by applying a callback to each value.
 
-    @within LinkedList
-    @param callback (index: number, value: T) -> U
-    @return { U }
+	@within LinkedList
+	@param callback (index: number, value: T) -> U
+	@return { U }
 ]=]
 function LinkedList.map<T, U>(self: InternalLinkedList<T>, callback: (index: number, value: T) -> U): { U }
 	local result = table.create(self._size)
@@ -437,11 +437,11 @@ function LinkedList.map<T, U>(self: InternalLinkedList<T>, callback: (index: num
 end
 
 --[=[
-    Creates a new linked list containing only values that satisfy the predicate.
+	Creates a new linked list containing only values that satisfy the predicate.
 
-    @within LinkedList
-    @param callback (index: number, value: T) -> boolean
-    @return LinkedListType<T>
+	@within LinkedList
+	@param callback (index: number, value: T) -> boolean
+	@return LinkedListType<T>
 ]=]
 function LinkedList.filter<T>(
 	self: InternalLinkedList<T>,
@@ -461,10 +461,10 @@ function LinkedList.filter<T>(
 end
 
 --[=[
-    Calls the given callback for each value in the list.
-    
-    @within LinkedList
-    @param callback (index: number, value: T) -> ()
+	Calls the given callback for each value in the list.
+	
+	@within LinkedList
+	@param callback (index: number, value: T) -> ()
 ]=]
 function LinkedList.forEach<T>(self: InternalLinkedList<T>, callback: (index: number, value: T) -> ())
 	local current = self._first

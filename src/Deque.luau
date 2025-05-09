@@ -59,10 +59,10 @@ function Deque._isEmpty<T>(self: InternalDeque<T>): boolean
 end
 
 --[=[
-    Creates a new empty Deque instance.
+	Creates a new empty Deque instance.
 
-    @within Deque
-    @return DequeType<T> -- A new empty deque.
+	@within Deque
+	@return DequeType<T> -- A new empty deque.
 ]=]
 function Deque.new<T>(): DequeType<T>
 	local self = {
@@ -75,10 +75,10 @@ function Deque.new<T>(): DequeType<T>
 end
 
 --[=[
-    Returns a shallow array copy of the current deque in front-to-back order.
+	Returns a shallow array copy of the current deque in front-to-back order.
 
-    @within Deque
-    @return { T } -- A table containing all elements in deque order.
+	@within Deque
+	@return { T } -- A table containing all elements in deque order.
 ]=]
 function Deque.getDeque<T>(self: InternalDeque<T>): { T }
 	local result = table.create(self:size())
@@ -91,20 +91,20 @@ function Deque.getDeque<T>(self: InternalDeque<T>): { T }
 end
 
 --[=[
-    Returns the number of elements in the deque.
+	Returns the number of elements in the deque.
 
-    @within Deque
-    @return number -- The size of the deque.
+	@within Deque
+	@return number -- The size of the deque.
 ]=]
 function Deque.size<T>(self: InternalDeque<T>): number
 	return self._last - self._first + 1
 end
 
 --[=[
-    Returns a new deque with the same elements as this one. Throws an error if the deque is empty.
+	Returns a new deque with the same elements as this one. Throws an error if the deque is empty.
 
-    @within Deque
-    @return DequeType<T> -- A copy of the current deque.
+	@within Deque
+	@return DequeType<T> -- A copy of the current deque.
 ]=]
 function Deque.copy<T>(self: InternalDeque<T>): DequeType<T>
 	if self:_isEmpty() then
@@ -119,9 +119,9 @@ function Deque.copy<T>(self: InternalDeque<T>): DequeType<T>
 end
 
 --[=[
-    Removes all elements from the deque.
+	Removes all elements from the deque.
 
-    @within Deque
+	@within Deque
 ]=]
 function Deque.clear<T>(self: InternalDeque<T>)
 	self._first = 0
@@ -130,10 +130,10 @@ function Deque.clear<T>(self: InternalDeque<T>)
 end
 
 --[=[
-    Inserts a value at the front of the deque.
+	Inserts a value at the front of the deque.
 
-    @within Deque
-    @param value T -- The value to insert.
+	@within Deque
+	@param value T -- The value to insert.
 ]=]
 function Deque.pushFirst<T>(self: InternalDeque<T>, value: T)
 	self._first -= 1
@@ -141,10 +141,10 @@ function Deque.pushFirst<T>(self: InternalDeque<T>, value: T)
 end
 
 --[=[
-    Inserts a value at the back of the deque.
+	Inserts a value at the back of the deque.
 
-    @within Deque
-    @param value T -- The value to insert.
+	@within Deque
+	@param value T -- The value to insert.
 ]=]
 function Deque.pushLast<T>(self: InternalDeque<T>, value: T)
 	self._last += 1
@@ -152,10 +152,10 @@ function Deque.pushLast<T>(self: InternalDeque<T>, value: T)
 end
 
 --[=[
-    Removes and returns the value at the front of the deque.
+	Removes and returns the value at the front of the deque.
 
-    @within Deque
-    @return T? -- The removed value, or nil if the deque is empty.
+	@within Deque
+	@return T? -- The removed value, or nil if the deque is empty.
 ]=]
 function Deque.popFirst<T>(self: InternalDeque<T>): T?
 	if self:_isEmpty() then
@@ -168,10 +168,10 @@ function Deque.popFirst<T>(self: InternalDeque<T>): T?
 end
 
 --[=[
-    Removes and returns the value at the back of the deque.
+	Removes and returns the value at the back of the deque.
 
-    @within Deque
-    @return T? -- The removed value, or nil if the deque is empty.
+	@within Deque
+	@return T? -- The removed value, or nil if the deque is empty.
 ]=]
 function Deque.popLast<T>(self: InternalDeque<T>): T?
 	if self:_isEmpty() then
@@ -184,10 +184,10 @@ function Deque.popLast<T>(self: InternalDeque<T>): T?
 end
 
 --[=[
-    Returns the value at the front of the deque without removing it.
+	Returns the value at the front of the deque without removing it.
 
-    @within Deque
-    @return T? -- The front value, or nil if the deque is empty.
+	@within Deque
+	@return T? -- The front value, or nil if the deque is empty.
 ]=]
 function Deque.peekFirst<T>(self: InternalDeque<T>): T?
 	if self:_isEmpty() then
@@ -197,10 +197,10 @@ function Deque.peekFirst<T>(self: InternalDeque<T>): T?
 end
 
 --[=[
-    Returns the value at the back of the deque without removing it.
+	Returns the value at the back of the deque without removing it.
 
-    @within Deque
-    @return T? -- The back value, or nil if the deque is empty.
+	@within Deque
+	@return T? -- The back value, or nil if the deque is empty.
 ]=]
 function Deque.peekLast<T>(self: InternalDeque<T>): T?
 	if self:_isEmpty() then

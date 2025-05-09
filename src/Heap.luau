@@ -213,7 +213,7 @@ end
 
 --[=[
 	Removes and returns the top element from the heap.
-    
+	
 	@within Heap
 	@return T? -- The removed highest or lowest priority value.
 ]=]

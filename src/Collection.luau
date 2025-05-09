@@ -59,10 +59,10 @@ function Collection._isEmpty<T>(self: InternalCollection<T>): boolean
 end
 
 --[=[
-    Creates a new Collection.
+	Creates a new Collection.
 
-    @within Collection
-    @return CollectionType<T> -- A new, empty collection.
+	@within Collection
+	@return CollectionType<T> -- A new, empty collection.
 ]=]
 function Collection.new<T>(): CollectionType<T>
 	local self = {
@@ -73,10 +73,10 @@ function Collection.new<T>(): CollectionType<T>
 end
 
 --[=[
-    Returns a shallow array copy of the collection.
+	Returns a shallow array copy of the collection.
 
-    @within Collection
-    @return { T } -- A table containing all elements in the collection.
+	@within Collection
+	@return { T } -- A table containing all elements in the collection.
 ]=]
 function Collection.getCollection<T>(self: InternalCollection<T>): { T }
 	local result = table.create(#self._collection)
@@ -87,20 +87,20 @@ function Collection.getCollection<T>(self: InternalCollection<T>): { T }
 end
 
 --[=[
-    Returns the number of elements in the collection.
+	Returns the number of elements in the collection.
 
-    @within Collection
-    @return number -- The size of the collection.
+	@within Collection
+	@return number -- The size of the collection.
 ]=]
 function Collection.size<T>(self: InternalCollection<T>): number
 	return #self._collection
 end
 
 --[=[
-    Returns a shallow copy of the current collection. Throws an error if the collection is empty.
+	Returns a shallow copy of the current collection. Throws an error if the collection is empty.
 
-    @within Collection
-    @return CollectionType<T> -- A duplicate of the collection.
+	@within Collection
+	@return CollectionType<T> -- A duplicate of the collection.
 ]=]
 function Collection.copy<T>(self: InternalCollection<T>): CollectionType<T>
 	if self:_isEmpty() then
@@ -114,41 +114,41 @@ function Collection.copy<T>(self: InternalCollection<T>): CollectionType<T>
 end
 
 --[=[
-    Removes all elements from the collection.
+	Removes all elements from the collection.
 
-    @within Collection
+	@within Collection
 ]=]
 function Collection.clear<T>(self: InternalCollection<T>)
 	table.clear(self._collection)
 end
 
 --[=[
-    Appends a value to the end of the collection.
+	Appends a value to the end of the collection.
 
-    @within Collection
-    @param value T -- The value to add.
+	@within Collection
+	@param value T -- The value to add.
 ]=]
 function Collection.add<T>(self: InternalCollection<T>, value: T)
 	table.insert(self._collection, value)
 end
 
 --[=[
-    Inserts a value at a given index.
+	Inserts a value at a given index.
 
-    @within Collection
-    @param index number -- The index to insert at (0-based).
-    @param value T -- The value to insert.
+	@within Collection
+	@param index number -- The index to insert at (0-based).
+	@param value T -- The value to insert.
 ]=]
 function Collection.insert<T>(self: InternalCollection<T>, index: number, value: T)
 	table.insert(self._collection, index + 1, value)
 end
 
 --[=[
-    Removes and returns the value at the specified index.
+	Removes and returns the value at the specified index.
 
-    @within Collection
-    @param index number -- The index to remove (0-based).
-    @return T -- The value removed from the collection.
+	@within Collection
+	@param index number -- The index to remove (0-based).
+	@return T -- The value removed from the collection.
 ]=]
 function Collection.remove<T>(self: InternalCollection<T>, index: number): T
 	local value = table.remove(self._collection, index + 1)
@@ -159,11 +159,11 @@ function Collection.remove<T>(self: InternalCollection<T>, index: number): T
 end
 
 --[=[
-    Retrieves the value at a specific index.
+	Retrieves the value at a specific index.
 
-    @within Collection
-    @param index number -- The index to retrieve (0-based).
-    @return T -- The value at the specified index.
+	@within Collection
+	@param index number -- The index to retrieve (0-based).
+	@return T -- The value at the specified index.
 ]=]
 function Collection.get<T>(self: InternalCollection<T>, index: number): T
 	local value = self._collection[index + 1]
@@ -174,11 +174,11 @@ function Collection.get<T>(self: InternalCollection<T>, index: number): T
 end
 
 --[=[
-    Replaces the value at a given index.
+	Replaces the value at a given index.
 
-    @within Collection
-    @param index number -- The index to modify (0-based).
-    @param value T -- The new value to set.
+	@within Collection
+	@param index number -- The index to modify (0-based).
+	@param value T -- The new value to set.
 ]=]
 function Collection.set<T>(self: InternalCollection<T>, index: number, value: T)
 	if index < 0 or index >= #self._collection then
@@ -188,21 +188,21 @@ function Collection.set<T>(self: InternalCollection<T>, index: number, value: T)
 end
 
 --[=[
-    Checks whether the collection contains a specific value.
+	Checks whether the collection contains a specific value.
 
-    @within Collection
-    @param value T -- The value to check for.
-    @return boolean -- True if the value is found, otherwise false.
+	@within Collection
+	@param value T -- The value to check for.
+	@return boolean -- True if the value is found, otherwise false.
 ]=]
 function Collection.contains<T>(self: InternalCollection<T>, value: T): boolean
 	return Collection.indexOf(self, value) ~= nil
 end
 
 --[=[
-    Executes a function for each element in the collection.
+	Executes a function for each element in the collection.
 
-    @within Collection
-    @param callback (value: T, index: number) -> () -- The function to apply to each element.
+	@within Collection
+	@param callback (value: T, index: number) -> () -- The function to apply to each element.
 ]=]
 function Collection.forEach<T>(self: InternalCollection<T>, callback: (value: T, index: number) -> ())
 	for i, v in self._collection do
@@ -211,11 +211,11 @@ function Collection.forEach<T>(self: InternalCollection<T>, callback: (value: T,
 end
 
 --[=[
-    Transforms each element in the collection using the callback.
+	Transforms each element in the collection using the callback.
 
-    @within Collection
-    @param callback (value: T, index: number) -> U -- The transformation function.
-    @return CollectionType<U> -- A new collection with transformed values.
+	@within Collection
+	@param callback (value: T, index: number) -> U -- The transformation function.
+	@return CollectionType<U> -- A new collection with transformed values.
 ]=]
 function Collection.map<T, U>(self: InternalCollection<T>, callback: (value: T, index: number) -> U): CollectionType<U>
 	local new = Collection.new() :: InternalCollection<U>
@@ -226,11 +226,11 @@ function Collection.map<T, U>(self: InternalCollection<T>, callback: (value: T, 
 end
 
 --[=[
-    Filters the collection based on a predicate function.
+	Filters the collection based on a predicate function.
 
-    @within Collection
-    @param predicate (value: T, index: number) -> boolean -- The filter condition.
-    @return CollectionType<T> -- A new collection with values that match the condition.
+	@within Collection
+	@param predicate (value: T, index: number) -> boolean -- The filter condition.
+	@return CollectionType<T> -- A new collection with values that match the condition.
 ]=]
 function Collection.filter<T>(
 	self: InternalCollection<T>,
@@ -246,9 +246,9 @@ function Collection.filter<T>(
 end
 
 --[=[
-    Reverses the collection in place.
+	Reverses the collection in place.
 
-    @within Collection
+	@within Collection
 ]=]
 function Collection.reverse<T>(self: InternalCollection<T>)
 	local size = #self._collection
