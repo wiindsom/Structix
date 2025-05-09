@@ -97,7 +97,7 @@ export default function Home() {
             <Head>
                 <title>Structix</title>
                 <meta property="og:title" content="Structix" />
-                <meta property="og:description" content="A data structure library for Roblox developers." />
+                <meta property="og:description" content="Type-Safe, Java-Inspired Data Structures for Roblox." />
                 <meta property="og:image" content="https://wiindsom.github.io/Structix/og-image.jpg" />
                 <meta property="og:site_name" content="wiindsom" />
                 <meta name="theme-color" content="#B19CD7" />
